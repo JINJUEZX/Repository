@@ -1,8 +1,6 @@
 package com.example.bitcoin.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.example.bitcoin.api.BaticionApi;
+import com.example.bitcoin.api.BitcoinApi;
 import com.example.bitcoin.api.BitcoinJsonRpcClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TempController {
 
     @Autowired
-    private BaticionApi baticionApi;
+    private BitcoinApi baticionApi;
 
     @Autowired
     private BitcoinJsonRpcClient bitcoinJsonRpcClient;

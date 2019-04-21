@@ -3,6 +3,8 @@ package com.example.bitcoin.mapper;
 import com.example.bitcoin.po.TransactionDetail;
 import com.example.bitcoin.po.TransactionDetailKey;
 
+import java.util.List;
+
 public interface TransactionDetailMapper {
     int deleteByPrimaryKey(TransactionDetailKey key);
 
@@ -15,4 +17,8 @@ public interface TransactionDetailMapper {
     int updateByPrimaryKeySelective(TransactionDetail record);
 
     int updateByPrimaryKey(TransactionDetail record);
+
+    List<TransactionDetail> selectByAddress(String address);
+
+    void truncate();
 }

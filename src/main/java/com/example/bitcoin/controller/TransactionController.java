@@ -17,29 +17,25 @@ import java.util.List;
 @EnableAutoConfiguration
 @RequestMapping("/transaction")
 public class TransactionController {
-
-    @Autowired
-    private TransactionService transactionService;
-
     @GetMapping("/getRecentTransactionsById")
     public List<TransactionListDTO> getRecentTransactionsById(@RequestParam Integer blockchainId){
-        return transactionService.getRecentTransactionsById(blockchainId);
+        return null;
     }
 
     @GetMapping("/getRecentTransactionsByNameType")
     public List<TransactionListDTO> getRecentTransactionsByNameType(@RequestParam String name,
                                                                     @RequestParam String type){
-        return transactionService.getRecentTransactionsByNameType(name,type);
+        return null;
     }
 
     @GetMapping("/getTransactionInfoByTxid")
     public TransactionInfoDTO getTransactionInfoByTxid(@RequestParam String txid){
-        return transactionService.getTransactionInfoByTxid(txid);
+        return null;
     }
 
     @GetMapping("/getTransactionInfoByTxhash")
     public TransactionInfoDTO getTransactionInfoByTxhash(@RequestParam String txhash){
-        return transactionService.getTransactionInfoByTxhash(txhash);
+        return null;
     }
 
 }

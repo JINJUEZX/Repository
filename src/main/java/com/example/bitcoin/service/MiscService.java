@@ -3,11 +3,8 @@ package com.example.bitcoin.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MiscService {
+public interface MiscService {
+    void importFromHeight(Integer blockHeight, Boolean isClean);
 
-    public void importFromHeight(Integer blockHeight, Boolean isClean) {
-    }
-
-    public void importFromHash(String blockhash, Boolean isClean) {
-    }
+    void importFromHash(String blockHash, Boolean isClean) throws Throwable;
 }

@@ -2,6 +2,8 @@ package com.example.bitcoin.controller;
 
 import com.example.bitcoin.dto.AddressInfo;
 import com.example.bitcoin.dto.TransactionInBlockDTO;
+import com.example.bitcoin.mapper.TransactionDetailMapper;
+import com.example.bitcoin.po.TransactionDetail;
 import com.example.bitcoin.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -18,17 +20,18 @@ import java.util.List;
 public class AddressController {
 
     @Autowired
-    private AddressService addressService;
+    private TransactionDetailMapper transactionDetailMapper;
 
     @GetMapping("/getAddressInfo")
     public AddressInfo getAddressInfo(@RequestParam String address){
-        return addressService.getAddressInfo(address);
+        return null;
     }
 
     @GetMapping("/getAddressTransactions")
-    public List<TransactionInBlockDTO> getAddressTransactions(@RequestParam String address,
-                                                              @RequestParam(required = false, defaultValue = "1") Integer pageNum){
-        return addressService.getAddressTransactions(address,pageNum);
+    public List<TransactionDetail> getAddressTransactions(@RequestParam String address,
+                                                          @RequestParam(required = false, defaultValue = "1") Integer pageNum){
+        List<TransactionDetail> transactionDetails = transactionDetailMapper.selectByAddress(address);
+        return transactionDetails;
     }
 
 }

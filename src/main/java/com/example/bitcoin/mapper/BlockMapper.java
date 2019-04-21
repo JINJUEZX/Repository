@@ -26,4 +26,9 @@ public interface BlockMapper {
     BlockDetailDTO getBlockDetailByHash(String blockhash);
 
     BlockDetailDTO getBlockDetailByHeight(Integer blockheight);
+
+    List<Block> selectRecent();
+
+    void truncate();
+
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "bitcoin", url = "http://localhost:18332")
-public interface BaticionApi {
+public interface BitcoinApi {
     @GetMapping("/rest/chaininfo.json")
     JSONObject getChainInfo();
 
@@ -28,4 +28,7 @@ public interface BaticionApi {
 
     @GetMapping("/rest/mempool/contents.json")
     JSONObject getMempoolContents();
+
+    @GetMapping("/rest/getutxos/{txid}-{n}.json")
+    JSONObject getUTXO(@PathVariable("txid") String txid, @PathVariable("n") Integer n);
 }

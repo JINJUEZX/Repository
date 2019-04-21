@@ -17,7 +17,7 @@ public class BitcoinJsonRpcClient {
 
     public BitcoinJsonRpcClient() throws MalformedURLException {
         HashMap<String, String> headers = new HashMap<>();
-        String authStrOrig = String.format("%s:%s","cjf","123456");
+        String authStrOrig = String.format("%s:%s","gcq","123456");
         String authStr = Base64.getEncoder().encodeToString(authStrOrig.getBytes());
         String authStrResult = String.format("Basic %s",authStr);
         headers.put("Authorization",authStrResult);
@@ -34,5 +34,15 @@ public class BitcoinJsonRpcClient {
         JSONObject balance = balances.getJSONObject(0);
         Double amount = balance.getDouble("amount");
         return amount;
+    }
+
+    public JSONObject getRawTransaxtion(String txid) throws Throwable {
+        JSONObject rawTransaction = jsonRpcHttpClient.invoke("getrawtransaction", new Object[]{txid, true}, JSONObject.class);
+        return rawTransaction;
+    }
+
+    public String getBestBlockhash() throws Throwable {
+        String bestblockhash = jsonRpcHttpClient.invoke("getbestblockhash", new Object[]{}, String.class);
+        return bestblockhash;
     }
 }
