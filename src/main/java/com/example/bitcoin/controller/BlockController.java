@@ -1,5 +1,7 @@
 package com.example.bitcoin.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.example.bitcoin.api.BitcoinApi;
 import com.example.bitcoin.api.BitcoinJsonRpcClient;
 import com.example.bitcoin.dto.BlockDetailDTO;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,42 +41,42 @@ public class BlockController {
     @GetMapping("/getRecentBlocks")
     public List<BlockListDTO> getRecentBlocks() throws Throwable {
 
-//        String bestBlockhash = bitcoinJsonRpcClient.getBestBlockhash();
-//        String tempBlockhash = bestBlockhash;
+//            String bestBlockhash = bitcoinJsonRpcClient.getBestBlockhash();
+//            String tempBlockhash = bestBlockhash;
 //
-//        List<BlockListDTO> blockListDTOS = new LinkedList<>();
+//            List<BlockListDTO> blockListDTOS = new LinkedList<>();
 //
-//        for (int i = 0; i < 5; i++) {
-//            JSONObject block = bitcoinApi.getNoTxBlock(tempBlockhash);
-//            BlockListDTO blockListDTO = new BlockListDTO();
-//            blockListDTO.setHeight(block.getInteger("height"));
-//            Long time = block.getLong("time");
-//            Date date = new Date(time * 1000);
-//            blockListDTO.setTime(date);
-//            blockListDTO.setTxSize(block.getJSONArray("tx").size());
-//            blockListDTO.setSizeOnDisk(block.getLong("size"));
-//            blockListDTOS.add(blockListDTO);
-//            tempBlockhash = block.getString("previousblockhash");
-//        }
+//            for (int i = 0; i < 5; i++) {
+//                JSONObject block = bitcoinApi.getNoTxBlock(tempBlockhash);
+//                BlockListDTO blockListDTO = new BlockListDTO();
+//                blockListDTO.setHeight(block.getInteger("height"));
+//                Long time = block.getLong("time");
+//                Date date = new Date(time * 1000);
+//                blockListDTO.setTime(date);
+//                blockListDTO.setTxSize(block.getJSONArray("tx").size());
+//                blockListDTO.setSizeOnDisk(block.getLong("size"));
+//                blockListDTOS.add(blockListDTO);
+//                tempBlockhash = block.getString("previousblockhash");
+//            }
 
-//        JSONObject chainInfo = bitcoinApi.getChainInfo();
-//        Integer height = chainInfo.getInteger("blocks");
-//        height -= 5;
-//        String blockHashByHeight = bitcoinJsonRpcClient.getBlockHashByHeight(height);
-//        JSONArray blockHeaders = bitcoinApi.getBlockHeaders(5, blockHashByHeight);
+//            JSONObject chainInfo = bitcoinApi.getChainInfo();
+//            Integer height = chainInfo.getInteger("blocks");
+//            height -= 5;
+//            String blockHashByHeight = bitcoinJsonRpcClient.getBlockHashByHeight(height);
+//            JSONArray blockHeaders = bitcoinApi.getBlockHeaders(5, blockHashByHeight);
 //
-//        LinkedList<BlockListDTO> blockListDTOS = new LinkedList<>();
-//        for (int i = 4; i > -1; i--) {
-//            JSONObject block = blockHeaders.getJSONObject(i);
-//            BlockListDTO blockListDTO = new BlockListDTO();
-//            blockListDTO.setHeight(block.getInteger("height"));
-//            Long time = block.getLong("time");
-//            Date date = new Date(time * 1000);
-//            blockListDTO.setTime(date);
-//            //todo add size on disk
-//            blockListDTO.setTxSize(block.getInteger("nTx"));
-//            blockListDTOS.add(blockListDTO);
-//        }
+//            LinkedList<BlockListDTO> blockListDTOS = new LinkedList<>();
+//            for (int i = 4; i > -1; i--) {
+//                JSONObject block = blockHeaders.getJSONObject(i);
+//                BlockListDTO blockListDTO = new BlockListDTO();
+//                blockListDTO.setHeight(block.getInteger("height"));
+//                Long time = block.getLong("time");
+//                Date date = new Date(time * 1000);
+//                blockListDTO.setTime(date);
+//                //todo add size on disk
+//                blockListDTO.setTxSize(block.getInteger("nTx"));
+//                blockListDTOS.add(blockListDTO);
+//            }
 
         List<Block> blocks = blockMapper.selectRecent();
         List<BlockListDTO> blockListDTOS = blocks.stream().map(block -> {
@@ -93,16 +97,16 @@ public class BlockController {
     @GetMapping("/getRecentBlocksByNameType")
     public List<BlockListDTO> getRecentBlocksByNameType(@RequestParam String name,
                                                         @RequestParam String type){
-        return null;
+        return blockMapper.getRecentBlocksByNameType(name,type);
     }
 
     @GetMapping("/getBlockDetailByHash")
     public BlockDetailDTO getBlockDetailByHash(@RequestParam String blockhash){
-        return null;
+        return blockMapper.getBlockDetailByHash(blockhash);
     }
 
     @GetMapping("/getBlockDetailByHeight")
     public BlockDetailDTO getBlockDetailByHeight(@RequestParam Integer blockheight){
-        return null;
+        return blockMapper.getBlockDetailByHeight(blockheight);
     }
 }

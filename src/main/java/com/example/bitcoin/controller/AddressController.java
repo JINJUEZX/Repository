@@ -24,7 +24,7 @@ public class AddressController {
 
     @GetMapping("/getAddressInfo")
     public AddressInfo getAddressInfo(@RequestParam String address){
-        return null;
+        return transactionDetailMapper.getAddressInfo(address);
     }
 
     @GetMapping("/getAddressTransactions")
@@ -32,6 +32,7 @@ public class AddressController {
                                                           @RequestParam(required = false, defaultValue = "1") Integer pageNum){
         List<TransactionDetail> transactionDetails = transactionDetailMapper.selectByAddress(address);
         return transactionDetails;
+
     }
 
 }

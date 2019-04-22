@@ -1,5 +1,6 @@
 package com.example.bitcoin.mapper;
 
+import com.example.bitcoin.dto.AddressInfo;
 import com.example.bitcoin.po.TransactionDetail;
 import com.example.bitcoin.po.TransactionDetailKey;
 
@@ -21,4 +22,7 @@ public interface TransactionDetailMapper {
     List<TransactionDetail> selectByAddress(String address);
 
     void truncate();
+
+    AddressInfo getAddressInfo(String address);
+
 }

@@ -19,7 +19,7 @@ public class MiscController {
 
     @GetMapping("/search")
     public Object search(@RequestParam String keyword){
-        return null;
+        return miscService.search(keyword);
     }
 
     @GetMapping("/importFromHeight")
@@ -36,6 +36,6 @@ public class MiscController {
 
     @GetMapping("/getImportState")
     public ImportStateDTO getImportState(){
-        return null;
+        return miscService.getImportState();
     }
 }
