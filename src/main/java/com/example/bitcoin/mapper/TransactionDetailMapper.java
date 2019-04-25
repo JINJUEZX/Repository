@@ -1,13 +1,15 @@
 package com.example.bitcoin.mapper;
 
-import com.example.bitcoin.dto.AddressInfo;
 import com.example.bitcoin.po.TransactionDetail;
 import com.example.bitcoin.po.TransactionDetailKey;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface TransactionDetailMapper {
     int deleteByPrimaryKey(TransactionDetailKey key);
+
+    int truncate();
 
     int insert(TransactionDetail record);
 
@@ -15,14 +17,9 @@ public interface TransactionDetailMapper {
 
     TransactionDetail selectByPrimaryKey(TransactionDetailKey key);
 
+    List<TransactionDetail> selectByAddress(@Param("address") String address);
+
     int updateByPrimaryKeySelective(TransactionDetail record);
 
     int updateByPrimaryKey(TransactionDetail record);
-
-    List<TransactionDetail> selectByAddress(String address);
-
-    void truncate();
-
-    AddressInfo getAddressInfo(String address);
-
 }

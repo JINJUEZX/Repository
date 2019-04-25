@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "bitcoin", url = "http://localhost:18332")
 public interface BitcoinApi {
+
     @GetMapping("/rest/chaininfo.json")
     JSONObject getChainInfo();
 

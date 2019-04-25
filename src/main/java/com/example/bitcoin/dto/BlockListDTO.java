@@ -1,10 +1,8 @@
 package com.example.bitcoin.dto;
 
-import java.util.Date;
-
 public class BlockListDTO {
     private Integer height;
-    private Date time;
+    private Long time;
     private Integer txSize;
     private Long sizeOnDisk;
 
@@ -14,14 +12,6 @@ public class BlockListDTO {
 
     public void setHeight(Integer height) {
         this.height = height;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
     }
 
     public Integer getTxSize() {
@@ -38,5 +28,13 @@ public class BlockListDTO {
 
     public void setSizeOnDisk(Long sizeOnDisk) {
         this.sizeOnDisk = sizeOnDisk;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
     }
 }
