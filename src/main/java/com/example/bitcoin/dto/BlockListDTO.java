@@ -5,6 +5,7 @@ public class BlockListDTO {
     private Long time;
     private Integer txSize;
     private Long sizeOnDisk;
+    private String blockhash;
 
     public Integer getHeight() {
         return height;
@@ -12,6 +13,14 @@ public class BlockListDTO {
 
     public void setHeight(Integer height) {
         this.height = height;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
     }
 
     public Integer getTxSize() {
@@ -30,11 +39,33 @@ public class BlockListDTO {
         this.sizeOnDisk = sizeOnDisk;
     }
 
-    public Long getTime() {
-        return time;
+    public String getBlockhash() {
+        return blockhash;
     }
 
-    public void setTime(Long time) {
+    public void setBlockhash(String blockhash) {
+        this.blockhash = blockhash;
+    }
+
+    public BlockListDTO(Integer height, Long time, Integer txSize, Long sizeOnDisk, String blockhash) {
+        this.height = height;
         this.time = time;
+        this.txSize = txSize;
+        this.sizeOnDisk = sizeOnDisk;
+        this.blockhash = blockhash;
+    }
+
+    public BlockListDTO() {
+    }
+
+    @Override
+    public String toString() {
+        return "BlockListDTO{" +
+                "height=" + height +
+                ", time=" + time +
+                ", txSize=" + txSize +
+                ", sizeOnDisk=" + sizeOnDisk +
+                ", blockhash='" + blockhash + '\'' +
+                '}';
     }
 }

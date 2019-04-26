@@ -21,12 +21,18 @@
     blockhash, blockchain_id, height, time, tx_size, size_on_disk, difficulty, prev_blockhash, 
     next_blockhash, output_total, transaction_fees, merkle_root
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from block
     where blockhash = #{blockhash,jdbcType=CHAR}
   </select>
+
+  <select id="getBlockDetailByHeight" resultType="com.example.bitcoin.dto.BlockDetailDTO">
+      select * from block where height=#{blockheight}
+  </select>
+
   <select id="selectRecent" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -34,6 +40,14 @@
     order by height desc
     limit 5
   </select>
+
+  <select id="selectRecent2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from block
+    order by height desc
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from block
     where blockhash = #{blockhash,jdbcType=CHAR}

@@ -17,6 +17,13 @@
   <sql id="Base_Column_List">
     txid, txhash, blockhash, size, weight, time, total_input, total_output, fees
   </sql>
+
+  <select id="getTransactions" resultType="com.example.bitcoin.po.Transaction">
+    select t1.txid,t1.txhash,t1.time,t2.amount from `transaction` t1,transaction_detail t2 where t1.txid=t2.txid
+    ORDER BY t1.time desc
+    limit 5
+</select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -76,6 +76,7 @@ public class BlockController {
 
 //        List<Block> blocks = blockMapper.selectRecent();
         List<Block> blocks = blockService.selectRecent();
+
         List<BlockListDTO> blockListDTOS = blocks.stream().map(block -> {
             BlockListDTO blockListDTO = new BlockListDTO();
             blockListDTO.setHeight(block.getHeight());
@@ -91,6 +92,26 @@ public class BlockController {
 //        bitcoinApi.getBlockHeaders(recentCount,bestBlockhash)
     }
 
+
+    @GetMapping("/getRecentBlocks2")
+    public List<BlockListDTO> getRecentBlocks2() throws Throwable {
+
+        List<Block> blocks = blockService.selectRecent2();
+
+        List<BlockListDTO> blockListDTOS2 = blocks.stream().map(block -> {
+            BlockListDTO blockListDTO = new BlockListDTO();
+            blockListDTO.setHeight(block.getHeight());
+            blockListDTO.setTime(block.getTime().getTime());
+            blockListDTO.setTxSize(block.getTxSize());
+            blockListDTO.setSizeOnDisk(block.getSizeOnDisk());
+            blockListDTO.setBlockhash(block.getBlockhash());
+            return blockListDTO;
+        }).collect(Collectors.toList());
+
+        return blockListDTOS2;
+    }
+
+
     @GetMapping("/getRecentBlocksByNameType")
     public List<BlockListDTO> getRecentBlocksByNameType(@RequestParam String name,
                                                         @RequestParam String type){
@@ -103,7 +124,27 @@ public class BlockController {
     }
 
     @GetMapping("/getBlockDetailByHeight")
-    public BlockDetailDTO getBlockDetailByHeight(@RequestParam Integer blockheight){
-        return null;
+    public List<BlockDetailDTO> getBlockDetailByHeight(@RequestParam Integer blockheight){
+
+        List<Block> blocks = blockService.getBlockDetailByHeight(blockheight);
+
+        List<BlockDetailDTO> blockDetailDTOList = blocks.stream().map(block->{
+            BlockDetailDTO blockDetailDTO = new BlockDetailDTO();
+            blockDetailDTO.setBlockhash(block.getBlockhash());
+            blockDetailDTO.setDifficulty(block.getDifficulty());
+            blockDetailDTO.setMerkleRoot(block.getMerkleRoot());
+            blockDetailDTO.setNextBlockhash(block.getNextBlockhash());
+            blockDetailDTO.setOutputTotal(block.getOutputTotal());
+            blockDetailDTO.setPrevBlockhash(block.getPrevBlockhash());
+            blockDetailDTO.setSizeOnDisk(block.getSizeOnDisk());
+            blockDetailDTO.setTime(block.getTime());
+            blockDetailDTO.setTransactionFees(block.getTransactionFees());
+            blockDetailDTO.setTxSize(block.getTxSize());
+            return blockDetailDTO;
+        }).collect(Collectors.toList());
+
+        return blockDetailDTOList;
+
     }
+
 }

@@ -29,6 +29,7 @@ public class BlockDetailDTO {
 
     private List<TransactionInBlockDTO> transactions;
 
+
     public String getBlockhash() {
         return blockhash;
     }

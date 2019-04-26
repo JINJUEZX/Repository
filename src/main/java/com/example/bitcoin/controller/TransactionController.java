@@ -2,16 +2,21 @@ package com.example.bitcoin.controller;
 
 import com.example.bitcoin.dto.TransactionInfoDTO;
 import com.example.bitcoin.dto.TransactionListDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.bitcoin.po.Transaction;
+import com.example.bitcoin.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/transaction")
+@CrossOrigin
 public class TransactionController {
+
+    @Autowired
+    private TransactionService transactionService;
 
     @GetMapping("/getRecentTransactionsById")
     public List<TransactionListDTO> getRecentTransactionsById(@RequestParam Integer blockchainId){
@@ -32,6 +37,23 @@ public class TransactionController {
     @GetMapping("/getTransactionInfoByTxhash")
     public TransactionInfoDTO getTransactionInfoByTxhash(@RequestParam String txhash){
         return null;
+    }
+
+    @GetMapping("/getTransactions")
+    public List<TransactionListDTO> getTransactions(){
+
+        List<Transaction> transactions = transactionService.getTransactions();
+
+        List<TransactionListDTO> transactionListDTOS = transactions.stream().map(transaction->{
+            TransactionListDTO transactionListDTO = new TransactionListDTO();
+            transactionListDTO.setTxid(transaction.getTxid());
+            transactionListDTO.setTxhash(transaction.getTxhash());
+            transactionListDTO.setTime(transaction.getTime());
+            transactionListDTO.setAmount(transaction.getAmount());
+            return transactionListDTO;
+        }).collect(Collectors.toList());
+
+        return transactionListDTOS;
     }
 
 }

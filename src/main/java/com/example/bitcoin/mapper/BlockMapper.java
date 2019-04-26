@@ -1,5 +1,6 @@
 package com.example.bitcoin.mapper;
 
+import com.example.bitcoin.dto.BlockDetailDTO;
 import com.example.bitcoin.po.Block;
 
 import java.util.List;
@@ -20,4 +21,8 @@ public interface BlockMapper {
     int updateByPrimaryKeySelective(Block record);
 
     int updateByPrimaryKey(Block record);
+
+    List<Block> selectRecent2();
+
+    List<Block> getBlockDetailByHeight(Integer blockheight);
 }

@@ -2,6 +2,8 @@ package com.example.bitcoin.mapper;
 
 import com.example.bitcoin.po.Transaction;
 
+import java.util.List;
+
 public interface TransactionMapper {
     int deleteByPrimaryKey(String txid);
 
@@ -16,4 +18,7 @@ public interface TransactionMapper {
     int updateByPrimaryKeySelective(Transaction record);
 
     int updateByPrimaryKey(Transaction record);
+
+    List<Transaction> getTransactions();
+
 }

@@ -1,7 +1,11 @@
 var app = new Vue({
     el: '#app',
     data: {
-        blockListDTOS:[]
+        blockListDTOS:[],
+        transactionListDTOS:[],
+        i:true,
+        inputs:"",
+        amountUSD:"",
     },
 
     computed:{
@@ -12,11 +16,16 @@ var app = new Vue({
                 block.showSizeOnDisk=block.sizeOnDisk.toLocaleString('en');
             })
             return this.blockListDTOS;
+        },
+
+        amountUSD:function(){
+            return this.transactionListDTOS.amount*5000;
         }
     },
 
     mounted(){
         this.getBlockListDTOS();
+        this.getTransactionListDTOS();
     },
 
     methods:{
@@ -30,6 +39,33 @@ var app = new Vue({
             .catch(function(error){
                 console.log(error);
             })
+        },
+
+        getTransactionListDTOS(){
+            axios.get('http://localhost:8080/transaction/getTransactions')
+            .then(function(response){
+                console.log(response);
+                app.transactionListDTOS=response.data;
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        },
+
+        BlocksMore(){
+            location.href="BlocksMore.html";
+        },
+
+        TransactionsMore(){
+
+        },
+
+        blocksClick(){
+            this.i=true;
+        },
+
+        transactionClick(){
+            this.i=false;
         },
         
     }

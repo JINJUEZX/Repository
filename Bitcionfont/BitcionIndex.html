@@ -15,28 +15,71 @@
         <el-container>
             <br>
             <el-header>
-                <el-input v-model="input" placeholder="Search"></el-input>
-                <el-button type="primary">Search</el-button>
+                <table>
+                    <td>
+                        <el-input v-model="inputs" placeholder="Search"></el-input>
+                    </td>
+                    <td>
+                        <el-button type="primary">Search</el-button>
+                    </td>
+                </table>
             </el-header>
-            <br>
+
             <el-main>
 
                 <el-button type="primary" plain @click="blocksClick">BLOCKS</el-button>
-                <el-button type="primary" plain @click="">TRANSACTIONS</el-button>
+                <el-button type="primary" plain @click="transactionClick">TRANSACTIONS</el-button>
 
-                <el-table :data="showBlockListDTOS" style="width: 100%" :cell-style="{'text-align':'center'}" :header-cell-style="{'text-align':'center'}">
-                    <el-table-column prop="height" label="Height">
-                        <template slot-scope="scope">
-                            <a :href="'http:'">{{scope.row.height}}</a>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="showTime" label="Age">
-                    </el-table-column>
-                    <el-table-column prop="txSize" label="Transactions">
-                    </el-table-column>
-                    <el-table-column prop="showSizeOnDisk" label="Size(bytes)">
-                    </el-table-column>
-                </el-table>
+                <div v-show="i">
+                    <el-table :data="showBlockListDTOS" style="width: 100%" :cell-style="{'text-align':'center'}"
+                        :header-cell-style="{'text-align':'center'}">
+
+                        <el-table-column prop="height" label="Height">
+                            <template slot-scope="scope">
+                                <a :href="'file:///C:/Users/%E9%AB%98%E5%B8%B8%E6%B8%85/Desktop/Bitcionfont/BlockDetail.html?height='+scope.row.height">{{scope.row.height}}</a>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="showTime" label="Age">
+                        </el-table-column>
+                        <el-table-column prop="txSize" label="Transactions">
+                        </el-table-column>
+                        <el-table-column prop="showSizeOnDisk" label="Size(bytes)">
+                        </el-table-column>
+                    </el-table>
+                    <br>
+                    <div style="text-align:center">
+                        <el-button type="primary" plain @click="BlocksMore">View More</el-button>
+                    </div>
+                </div>
+
+                <div v-show="!i">
+                    <el-table :data="transactionListDTOS" style="width: 100%" :cell-style="{'text-align':'center'}"
+                        :header-cell-style="{'text-align':'center'}">
+
+                        <el-table-column prop="txhash" label="Transaction Hash">
+                            <template slot-scope="scope">
+                                <a :href="'http:'">{{scope.row.txhash}}</a>
+                            </template>
+                        </el-table-column>
+
+                        <el-table-column prop="time" label="Age">
+                        </el-table-column>
+                        <el-table-column prop="amount" label="Amount(BTC)">
+                            <template slot-scope="scope">
+                                {{scope.row.amount}} BTC
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="" label="Amount(USD)">
+                            <template slot-scope="scope">
+                                ${{scope.row.amount}}
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                    <br>
+                    <div style="text-align:center">
+                        <el-button type="primary" plain @click="TransactionsMore">View More</el-button>
+                    </div>
+                </div>
 
             </el-main>
         </el-container>

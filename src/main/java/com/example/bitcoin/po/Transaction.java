@@ -21,12 +21,14 @@ public class Transaction {
 
     private Double fees;
 
+    private Double amount;
+
     public String getTxid() {
         return txid;
     }
 
     public void setTxid(String txid) {
-        this.txid = txid == null ? null : txid.trim();
+        this.txid = txid;
     }
 
     public String getTxhash() {
@@ -34,7 +36,7 @@ public class Transaction {
     }
 
     public void setTxhash(String txhash) {
-        this.txhash = txhash == null ? null : txhash.trim();
+        this.txhash = txhash;
     }
 
     public String getBlockhash() {
@@ -42,7 +44,7 @@ public class Transaction {
     }
 
     public void setBlockhash(String blockhash) {
-        this.blockhash = blockhash == null ? null : blockhash.trim();
+        this.blockhash = blockhash;
     }
 
     public Long getSize() {
@@ -91,5 +93,45 @@ public class Transaction {
 
     public void setFees(Double fees) {
         this.fees = fees;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Transaction(String txid, String txhash, String blockhash, Long size, Integer weight, Date time, Double totalInput, Double totalOutput, Double fees, Double amount) {
+        this.txid = txid;
+        this.txhash = txhash;
+        this.blockhash = blockhash;
+        this.size = size;
+        this.weight = weight;
+        this.time = time;
+        this.totalInput = totalInput;
+        this.totalOutput = totalOutput;
+        this.fees = fees;
+        this.amount = amount;
+    }
+
+    public Transaction() {
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "txid='" + txid + '\'' +
+                ", txhash='" + txhash + '\'' +
+                ", blockhash='" + blockhash + '\'' +
+                ", size=" + size +
+                ", weight=" + weight +
+                ", time=" + time +
+                ", totalInput=" + totalInput +
+                ", totalOutput=" + totalOutput +
+                ", fees=" + fees +
+                ", amount=" + amount +
+                '}';
     }
 }
