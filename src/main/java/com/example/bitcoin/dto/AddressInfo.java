@@ -1,6 +1,8 @@
 package com.example.bitcoin.dto;
 
-public class AddressInfo {
+import java.io.Serializable;
+
+public class AddressInfo implements Serializable {
     private String address;
     private String hash160;
     private Integer txSize;

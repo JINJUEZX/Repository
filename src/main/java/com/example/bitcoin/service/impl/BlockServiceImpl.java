@@ -1,6 +1,7 @@
 package com.example.bitcoin.service.impl;
 
 import com.example.bitcoin.dto.BlockDetailDTO;
+import com.example.bitcoin.dto.TransactionInBlockDTO;
 import com.example.bitcoin.mapper.BlockMapper;
 import com.example.bitcoin.po.Block;
 import com.example.bitcoin.service.BlockService;
@@ -32,6 +33,11 @@ public class BlockServiceImpl implements BlockService {
     public List<Block> getBlockDetailByHeight(Integer blockheight) {
         List<Block> blocks = blockMapper.getBlockDetailByHeight(blockheight);
         return blocks;
+    }
+
+    @Override
+    public List<TransactionInBlockDTO> getTransactionsByBlockHash(String blockhash) {
+        return blockMapper.getTransactionsByBlockHash(blockhash);
     }
 
 }

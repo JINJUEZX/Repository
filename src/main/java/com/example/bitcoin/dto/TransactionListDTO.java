@@ -1,8 +1,9 @@
 package com.example.bitcoin.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TransactionListDTO {
+public class TransactionListDTO implements Serializable {
     private String txid;
 
     private String txhash;

@@ -13,6 +13,13 @@
     <div id="app">
 
         <el-container>
+
+            <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px'}" style="text-align:center">
+                <template>
+                    Block Explorer
+                </template>
+            </div>
+    
             <br>
             <el-header>
                 <table>
@@ -20,7 +27,7 @@
                         <el-input v-model="inputs" placeholder="Search"></el-input>
                     </td>
                     <td>
-                        <el-button type="primary">Search</el-button>
+                        <el-button type="primary" @click="handleSearch">Search</el-button>
                     </td>
                 </table>
             </el-header>
@@ -36,7 +43,8 @@
 
                         <el-table-column prop="height" label="Height">
                             <template slot-scope="scope">
-                                <a :href="'file:///C:/Users/%E9%AB%98%E5%B8%B8%E6%B8%85/Desktop/Bitcionfont/BlockDetail.html?height='+scope.row.height">{{scope.row.height}}</a>
+                                <a
+                                    :href="'file:///C:/Users/%E9%AB%98%E5%B8%B8%E6%B8%85/Desktop/Bitcionfont/BlockDetail.html?height='+scope.row.height">{{scope.row.height}}</a>
                             </template>
                         </el-table-column>
                         <el-table-column prop="showTime" label="Age">

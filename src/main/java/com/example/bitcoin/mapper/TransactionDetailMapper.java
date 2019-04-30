@@ -1,5 +1,8 @@
 package com.example.bitcoin.mapper;
 
+import com.example.bitcoin.dto.TxDetailInTxInfo;
+import com.example.bitcoin.po.Block;
+import com.example.bitcoin.po.Transaction;
 import com.example.bitcoin.po.TransactionDetail;
 import com.example.bitcoin.po.TransactionDetailKey;
 import org.apache.ibatis.annotations.Param;
@@ -22,4 +25,11 @@ public interface TransactionDetailMapper {
     int updateByPrimaryKeySelective(TransactionDetail record);
 
     int updateByPrimaryKey(TransactionDetail record);
+
+    List<Block> getBlockHash(Integer blockheight);
+
+    List<Transaction> getTransactions(String blockhash);
+
+    List<TxDetailInTxInfo> getTxDetailInTxInfos(String txid);
+
 }

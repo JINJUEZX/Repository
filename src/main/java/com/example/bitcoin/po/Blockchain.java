@@ -1,6 +1,8 @@
 package com.example.bitcoin.po;
 
-public class Blockchain {
+import java.io.Serializable;
+
+public class Blockchain implements Serializable {
     private Integer blockchainId;
 
     private String name;

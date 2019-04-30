@@ -1,9 +1,10 @@
 package com.example.bitcoin.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class BlockDetailDTO {
+public class BlockDetailDTO implements Serializable {
 
     private String blockhash;
 

@@ -29,8 +29,13 @@
     where blockhash = #{blockhash,jdbcType=CHAR}
   </select>
 
-  <select id="getBlockDetailByHeight" resultType="com.example.bitcoin.dto.BlockDetailDTO">
+  <select id="getBlockDetailByHeight" resultMap="BaseResultMap">
       select * from block where height=#{blockheight}
+  </select>
+
+
+  <select id="getTransactionsByBlockHash" parameterType="java.lang.String" resultType="com.example.bitcoin.dto.TransactionInBlockDTO">
+      select * from transaction where blockhash=#{blockhash}
   </select>
 
   <select id="selectRecent" resultMap="BaseResultMap">
@@ -46,6 +51,7 @@
     <include refid="Base_Column_List" />
     from block
     order by height desc
+    limit 100
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

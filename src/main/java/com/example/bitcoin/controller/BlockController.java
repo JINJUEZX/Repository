@@ -4,8 +4,10 @@ import com.example.bitcoin.api.BitcoinApi;
 import com.example.bitcoin.api.BitcoinJsonRpcClient;
 import com.example.bitcoin.dto.BlockDetailDTO;
 import com.example.bitcoin.dto.BlockListDTO;
+import com.example.bitcoin.dto.TransactionInBlockDTO;
 import com.example.bitcoin.mapper.BlockMapper;
 import com.example.bitcoin.po.Block;
+import com.example.bitcoin.po.Transaction;
 import com.example.bitcoin.service.BlockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -128,11 +130,17 @@ public class BlockController {
 
         List<Block> blocks = blockService.getBlockDetailByHeight(blockheight);
 
+        String blockhash = blocks.get(0).getBlockhash();
+
+        List<TransactionInBlockDTO> transactions = blockService.getTransactionsByBlockHash(blockhash);
+
         List<BlockDetailDTO> blockDetailDTOList = blocks.stream().map(block->{
             BlockDetailDTO blockDetailDTO = new BlockDetailDTO();
+
             blockDetailDTO.setBlockhash(block.getBlockhash());
             blockDetailDTO.setDifficulty(block.getDifficulty());
             blockDetailDTO.setMerkleRoot(block.getMerkleRoot());
+            blockDetailDTO.setHeight(block.getHeight());
             blockDetailDTO.setNextBlockhash(block.getNextBlockhash());
             blockDetailDTO.setOutputTotal(block.getOutputTotal());
             blockDetailDTO.setPrevBlockhash(block.getPrevBlockhash());
@@ -140,11 +148,15 @@ public class BlockController {
             blockDetailDTO.setTime(block.getTime());
             blockDetailDTO.setTransactionFees(block.getTransactionFees());
             blockDetailDTO.setTxSize(block.getTxSize());
+
+            blockDetailDTO.setTransactions(transactions);
             return blockDetailDTO;
         }).collect(Collectors.toList());
 
         return blockDetailDTOList;
 
     }
+
+
 
 }

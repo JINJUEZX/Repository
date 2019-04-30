@@ -12,6 +12,19 @@
   <sql id="Base_Column_List">
     txid, address, type, amount
   </sql>
+
+  <select id="getTxDetailInTxInfos" parameterType="java.lang.String" resultType="com.example.bitcoin.dto.TxDetailInTxInfo">
+      select * from transaction_detail where txid=#{txid}
+  </select>
+
+  <select id="getTransactions" resultType="com.example.bitcoin.po.Transaction">
+      select * from transaction where blockhash=#{blockhash}
+  </select>
+
+  <select id="getBlockHash" resultType="com.example.bitcoin.po.Block">
+      select * from block where height=#{blockheight}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="com.example.bitcoin.po.TransactionDetail" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -30,12 +43,14 @@
     where txid = #{txid,jdbcType=CHAR}
       and address = #{address,jdbcType=VARCHAR}
   </delete>
+
   <insert id="insert" parameterType="com.example.bitcoin.po.TransactionDetail">
     insert into transaction_detail (txid, address, type, 
       amount)
     values (#{txid,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
       #{amount,jdbcType=DOUBLE})
   </insert>
+
   <insert id="insertSelective" parameterType="com.example.bitcoin.po.TransactionDetail">
     insert into transaction_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -67,6 +82,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.example.bitcoin.po.TransactionDetail">
     update transaction_detail
     <set>

@@ -1,6 +1,8 @@
 package com.example.bitcoin.dto;
 
-public class BlockListDTO {
+import java.io.Serializable;
+
+public class BlockListDTO implements Serializable {
     private Integer height;
     private Long time;
     private Integer txSize;

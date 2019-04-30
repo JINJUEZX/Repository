@@ -1,9 +1,10 @@
 package com.example.bitcoin.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class TransactionInfoDTO {
+public class TransactionInfoDTO  {
     private String txid;
 
     private String txhash;

@@ -1,6 +1,7 @@
 package com.example.bitcoin.mapper;
 
 import com.example.bitcoin.dto.BlockDetailDTO;
+import com.example.bitcoin.dto.TransactionInBlockDTO;
 import com.example.bitcoin.po.Block;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface BlockMapper {
     List<Block> selectRecent2();
 
     List<Block> getBlockDetailByHeight(Integer blockheight);
+
+    List<TransactionInBlockDTO> getTransactionsByBlockHash(String blockhash);
+
 }

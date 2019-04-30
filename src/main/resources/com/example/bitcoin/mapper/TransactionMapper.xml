@@ -30,10 +30,12 @@
     from transaction
     where txid = #{txid,jdbcType=CHAR}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from transaction
     where txid = #{txid,jdbcType=CHAR}
   </delete>
+
   <insert id="insert" parameterType="com.example.bitcoin.po.Transaction">
     insert into transaction (txid, txhash, blockhash, 
       size, weight, time, 
@@ -44,6 +46,7 @@
       #{totalInput,jdbcType=DOUBLE}, #{totalOutput,jdbcType=DOUBLE}, #{fees,jdbcType=DOUBLE}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.example.bitcoin.po.Transaction">
     insert into transaction
     <trim prefix="(" suffix=")" suffixOverrides=",">

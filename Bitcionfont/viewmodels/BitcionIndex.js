@@ -5,7 +5,8 @@ var app = new Vue({
         transactionListDTOS:[],
         i:true,
         inputs:"",
-        amountUSD:"",
+        activeColor: 'blue',
+        fontSize: 40,        
     },
 
     computed:{
@@ -18,10 +19,10 @@ var app = new Vue({
             return this.blockListDTOS;
         },
 
-        amountUSD:function(){
-            return this.transactionListDTOS.amount*5000;
-        }
+        
     },
+
+    
 
     mounted(){
         this.getBlockListDTOS();
@@ -29,6 +30,19 @@ var app = new Vue({
     },
 
     methods:{
+
+        handleSearch(){
+            // axios.get('',{
+                
+            // })
+            // .then(function(response){
+            //     console.log(response);
+                
+            // })
+            // .catch(function(error){
+            //     console.log(error);
+            // })
+        },
 
         getBlockListDTOS(){
             axios.get('http://localhost:8080/block/getRecentBlocks')
@@ -57,6 +71,10 @@ var app = new Vue({
         },
 
         TransactionsMore(){
+            location.href="TransactionMore.html";
+        },
+
+        TransactionsMore(){
 
         },
 
@@ -67,6 +85,10 @@ var app = new Vue({
         transactionClick(){
             this.i=false;
         },
+
+        
         
     }
+
+    
 })

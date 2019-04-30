@@ -1,8 +1,9 @@
 package com.example.bitcoin.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Block {
+public class Block implements Serializable {
     private String blockhash;
 
     private Integer blockchainId;
@@ -32,7 +33,7 @@ public class Block {
     }
 
     public void setBlockhash(String blockhash) {
-        this.blockhash = blockhash == null ? null : blockhash.trim();
+        this.blockhash = blockhash;
     }
 
     public Integer getBlockchainId() {
@@ -88,7 +89,7 @@ public class Block {
     }
 
     public void setPrevBlockhash(String prevBlockhash) {
-        this.prevBlockhash = prevBlockhash == null ? null : prevBlockhash.trim();
+        this.prevBlockhash = prevBlockhash;
     }
 
     public String getNextBlockhash() {
@@ -96,7 +97,7 @@ public class Block {
     }
 
     public void setNextBlockhash(String nextBlockhash) {
-        this.nextBlockhash = nextBlockhash == null ? null : nextBlockhash.trim();
+        this.nextBlockhash = nextBlockhash;
     }
 
     public Double getOutputTotal() {
@@ -120,6 +121,42 @@ public class Block {
     }
 
     public void setMerkleRoot(String merkleRoot) {
-        this.merkleRoot = merkleRoot == null ? null : merkleRoot.trim();
+        this.merkleRoot = merkleRoot;
+    }
+
+    public Block(String blockhash, Integer blockchainId, Integer height, Date time, Integer txSize, Long sizeOnDisk, Double difficulty, String prevBlockhash, String nextBlockhash, Double outputTotal, Double transactionFees, String merkleRoot) {
+        this.blockhash = blockhash;
+        this.blockchainId = blockchainId;
+        this.height = height;
+        this.time = time;
+        this.txSize = txSize;
+        this.sizeOnDisk = sizeOnDisk;
+        this.difficulty = difficulty;
+        this.prevBlockhash = prevBlockhash;
+        this.nextBlockhash = nextBlockhash;
+        this.outputTotal = outputTotal;
+        this.transactionFees = transactionFees;
+        this.merkleRoot = merkleRoot;
+    }
+
+    public Block() {
+    }
+
+    @Override
+    public String toString() {
+        return "Block{" +
+                "blockhash='" + blockhash + '\'' +
+                ", blockchainId=" + blockchainId +
+                ", height=" + height +
+                ", time=" + time +
+                ", txSize=" + txSize +
+                ", sizeOnDisk=" + sizeOnDisk +
+                ", difficulty=" + difficulty +
+                ", prevBlockhash='" + prevBlockhash + '\'' +
+                ", nextBlockhash='" + nextBlockhash + '\'' +
+                ", outputTotal=" + outputTotal +
+                ", transactionFees=" + transactionFees +
+                ", merkleRoot='" + merkleRoot + '\'' +
+                '}';
     }
 }
